@@ -1,0 +1,16 @@
+C:\Users\jjrav\source\repos\MySpace_Inventory\bin\Debug\net10.0-windows\MySpace_Inventory.exe
+C:\Users\jjrav\source\repos\MySpace_Inventory\bin\Debug\net10.0-windows\MySpace_Inventory.deps.json
+C:\Users\jjrav\source\repos\MySpace_Inventory\bin\Debug\net10.0-windows\MySpace_Inventory.runtimeconfig.json
+C:\Users\jjrav\source\repos\MySpace_Inventory\bin\Debug\net10.0-windows\MySpace_Inventory.dll
+C:\Users\jjrav\source\repos\MySpace_Inventory\bin\Debug\net10.0-windows\MySpace_Inventory.pdb
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\MySpace_Inventory.Form1.resources
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\MySpace_Inventory.csproj.GenerateResource.cache
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\MySpace_Inventory.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\MySpace_Inventory.AssemblyInfoInputs.cache
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\MySpace_Inventory.AssemblyInfo.cs
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\MySpace_Inventory.csproj.CoreCompileInputs.cache
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\MySpace_Inventory.dll
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\refint\MySpace_Inventory.dll
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\MySpace_Inventory.pdb
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\MySpace_Inventory.genruntimeconfig.cache
+C:\Users\jjrav\source\repos\MySpace_Inventory\obj\Debug\net10.0-windows\ref\MySpace_Inventory.dll
