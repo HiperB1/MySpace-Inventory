@@ -1,4 +1,5 @@
-using MySpace_Inventory.resource;
+using MySpace_Inventory.Config;
+using MySpace_Inventory.Services;
 using System.Drawing.Text;
 
 
@@ -32,6 +33,7 @@ namespace MySpace_Inventory
         private void Form1_Load(object sender, EventArgs e)
         {
             update_inventary();
+
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)

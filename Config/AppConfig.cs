@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MySpace_Inventory.resource
+namespace MySpace_Inventory.Config
 {
     public static class AppConfig
     {
