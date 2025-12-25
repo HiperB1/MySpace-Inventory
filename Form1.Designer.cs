@@ -38,13 +38,14 @@
             button4 = new Button();
             btnActualizar = new Button();
             btnEliminar = new Button();
+            Valor = new ColumnHeader();
             SuspendLayout();
             // 
             // titulo_principal
             // 
             titulo_principal.AutoSize = true;
             titulo_principal.Font = new Font("Trebuchet MS", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            titulo_principal.Location = new Point(281, 22);
+            titulo_principal.Location = new Point(253, 19);
             titulo_principal.Name = "titulo_principal";
             titulo_principal.Size = new Size(170, 43);
             titulo_principal.TabIndex = 0;
@@ -53,7 +54,7 @@
             // btnAñadir
             // 
             btnAñadir.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAñadir.Location = new Point(199, 328);
+            btnAñadir.Location = new Point(171, 325);
             btnAñadir.Name = "btnAñadir";
             btnAñadir.Size = new Size(92, 31);
             btnAñadir.TabIndex = 1;
@@ -64,7 +65,7 @@
             // btnPrograma
             // 
             btnPrograma.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnPrograma.Location = new Point(199, 376);
+            btnPrograma.Location = new Point(171, 373);
             btnPrograma.Name = "btnPrograma";
             btnPrograma.Size = new Size(92, 31);
             btnPrograma.TabIndex = 2;
@@ -74,7 +75,7 @@
             // btnPedidos
             // 
             btnPedidos.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnPedidos.Location = new Point(464, 376);
+            btnPedidos.Location = new Point(436, 373);
             btnPedidos.Name = "btnPedidos";
             btnPedidos.Size = new Size(92, 31);
             btnPedidos.TabIndex = 3;
@@ -83,8 +84,8 @@
             // 
             // inventario_listview
             // 
-            inventario_listview.Columns.AddRange(new ColumnHeader[] { Producto, stock });
-            inventario_listview.Location = new Point(199, 126);
+            inventario_listview.Columns.AddRange(new ColumnHeader[] { Producto, stock, Valor });
+            inventario_listview.Location = new Point(171, 123);
             inventario_listview.Name = "inventario_listview";
             inventario_listview.Size = new Size(357, 155);
             inventario_listview.TabIndex = 4;
@@ -99,11 +100,12 @@
             // stock
             // 
             stock.Text = "Stock";
+            stock.TextAlign = HorizontalAlignment.Center;
             // 
             // button4
             // 
             button4.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(328, 376);
+            button4.Location = new Point(300, 373);
             button4.Name = "button4";
             button4.Size = new Size(92, 31);
             button4.TabIndex = 5;
@@ -113,7 +115,7 @@
             // btnActualizar
             // 
             btnActualizar.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnActualizar.Location = new Point(328, 328);
+            btnActualizar.Location = new Point(300, 325);
             btnActualizar.Name = "btnActualizar";
             btnActualizar.Size = new Size(92, 31);
             btnActualizar.TabIndex = 6;
@@ -124,18 +126,24 @@
             // btnEliminar
             // 
             btnEliminar.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnEliminar.Location = new Point(464, 328);
+            btnEliminar.Location = new Point(436, 325);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(92, 31);
             btnEliminar.TabIndex = 7;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
             // 
+            // Valor
+            // 
+            Valor.Text = "Valor ";
+            Valor.TextAlign = HorizontalAlignment.Center;
+            Valor.Width = 100;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(693, 450);
             Controls.Add(btnEliminar);
             Controls.Add(btnActualizar);
             Controls.Add(button4);
@@ -163,5 +171,6 @@
         private Button btnEliminar;
         private ColumnHeader Producto;
         private ColumnHeader stock;
+        private ColumnHeader Valor;
     }
 }

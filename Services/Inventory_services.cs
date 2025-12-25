@@ -43,5 +43,33 @@ namespace MySpace_Inventory.Services
 
         }
 
+        public static void AddProduct(string product_name, string product_value, string product_stock, string product_hours)
+        {
+            if(string.IsNullOrEmpty(product_name) || string.IsNullOrEmpty(product_value) || string.IsNullOrEmpty(product_stock) || string.IsNullOrEmpty(product_hours) || Convert.ToInt32(product_hours) <= 0)
+            {
+                MessageBox.Show("Debes rellenar todos los campos","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                try
+                {
+                    string producto_to_add = $"\n{product_name}-{product_stock}-{product_hours}-{product_value}";
+                    File.AppendAllText(AppConfig.inventory_path, producto_to_add);
+                    MessageBox.Show("Producto añadido correctamente","Registro Exitoso",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"Error: {e}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+            }
+                
+
+
+            
+        }
+
     }
 }
