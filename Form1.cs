@@ -12,10 +12,10 @@ namespace MySpace_Inventory
             InitializeComponent();
         }
 
-        private void update_inventary()
+        private void update_listview()
         {
             inventario_listview.Items.Clear();//Importante linea si no esta se sobreponen muchos elementos iguales al no limpiar antes de volver a agregar
-            List<Product> products = Inventory.GetAllProducts();//Usamos el metodo GetAllProducts para obtener una lista con todos los productos del inventario
+            List<Product> products = Inventory.GetAllProducts(AppConfig.inventory_path);//Usamos el metodo GetAllProducts para obtener una lista con todos los productos del inventario
 
             if (products.Count > 0)//Comprobamos si el inventario esta vacio
             {//En caso de no estar vacio iteramos 
@@ -35,13 +35,13 @@ namespace MySpace_Inventory
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            update_inventary();
+            update_listview();
 
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            update_inventary();
+            update_listview();
         }
 
         private void btnAñadir_Click(object sender, EventArgs e)
@@ -54,24 +54,31 @@ namespace MySpace_Inventory
         {
             
            
-            if (inventario_listview.SelectedItems.Count > 0)
+            if (inventario_listview.SelectedItems.Count > 0)//Comprobamos que si hayan seleccionado un producto del listview
             {
-                ListViewItem producto_name = inventario_listview.SelectedItems[0];
-                List<Product> allProducts = Inventory.GetAllProducts();
+                ListViewItem producto_name = inventario_listview.SelectedItems[0];//Obtenemos el item seleccionado del listview
+                List<Product> allProducts = Inventory.GetAllProducts(AppConfig.inventory_path);//Obtenemos todos los productos del inventario 
                 
-                foreach(Product product in allProducts)
+                foreach(Product product in allProducts)//Iteramos todos los productos para comparar el item buscado y el iterado
                 {
-                    if(product.Name.ToLower() ==  producto_name.Text.ToLower())
+                    if(product.Name.ToLower() ==  producto_name.Text.ToLower())//Comparamos si el producto iterado tiene el mismo nombre que el producto buscado
                     {
-
-                        Inventory.EliminateProductInventory(product);
+                        DialogResult confirmacion = MessageBox.Show($"Confirma querer eliminar el producto: {product.Name}", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        //Preguntamos al usuario si confirma eliminar el producto y guardamos su desicion en la variable confirmacion
+                        if (confirmacion == DialogResult.Yes)//Si el usuario confirma que desea eliminar 
+                        {
+                            Inventory.EliminateProductInventory(product, AppConfig.inventory_path);//Eliminamos el producto 
+                            MessageBox.Show("Producto eliminado correctamente", "Eliminacion exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
 
                     }
 
                 }
 
-
-
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar algun producto del inventario", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

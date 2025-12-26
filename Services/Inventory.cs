@@ -9,16 +9,16 @@ namespace MySpace_Inventory.Services
 {
     public static class Inventory
     {
-        private static List<Product> DeserializeInventory()
+        private static List<Product> DeserializeInventory(string path)
         {
 
             List<Product> products = new List<Product> { };//Creamos la lista donde vamos a guardar todos los productos
 
 
 
-            if (File.Exists(AppConfig.inventory_path))//Comprobamos que el archivo exista
+            if (File.Exists(path))//Comprobamos que el archivo exista
             {
-                string json = File.ReadAllText(AppConfig.inventory_path);//Leemos y guardamos toda la info del archivo
+                string json = File.ReadAllText(path);//Leemos y guardamos toda la info del archivo
 
 
                 if (!string.IsNullOrWhiteSpace(json))//Comprobamos que el archivo no este vacio o corrupto
@@ -31,18 +31,18 @@ namespace MySpace_Inventory.Services
             return products;
 
         }
-        private static void VerifyInventoryExist()
+        private static void VerifyInventoryExist(string path)
         {
-            if (!File.Exists(AppConfig.app_folder))//Verificamos si la carpeta donde guardaremos el inventario existe
+            if (!File.Exists(path))//Verificamos si la carpeta donde guardaremos el inventario existe
             {//En caso de no exisitir la crearemos, no es necesario crear el .json como tal pues el File.Write ya lo crea en caso de no existir
-                Directory.CreateDirectory(AppConfig.app_folder);
+                Directory.CreateDirectory(path);
             }
         }
-        public static Product? GetProduct(string product_to_search)//Esta funcion nos va a buscar un producto indicado y nos va a devolver el producto
+        public static Product? GetProduct(string product_to_search, string path)//Esta funcion nos va a buscar un producto indicado y nos va a devolver el producto
         {
 
-            VerifyInventoryExist();
-            List<Product> products = DeserializeInventory();//Usamos nuestro metodo para deserializar el inventario
+            VerifyInventoryExist(path);
+            List<Product> products = DeserializeInventory(path);//Usamos nuestro metodo para deserializar el inventario
 
             foreach(Product producto in products)//Recorremos la lista de productos
             {
@@ -59,10 +59,10 @@ namespace MySpace_Inventory.Services
 
         }
 
-        public static List<Product> GetAllProducts()//Esta funcion nos va a devolver todos los nombres de los productos en nuestro inventario
+        public static List<Product> GetAllProducts(string path)//Esta funcion nos va a devolver todos los nombres de los productos en nuestro inventario
         {
 
-            List<Product> products = DeserializeInventory();//Creamos la lista donde vamos a guardar todos los productos
+            List<Product> products = DeserializeInventory(path);//Creamos la lista donde vamos a guardar todos los productos
 
 
             return products;//Retornamos
@@ -70,15 +70,15 @@ namespace MySpace_Inventory.Services
 
         }
 
-        public static void AddProductInventory(Product producto)//Añade un producto al inventario
-        { 
+        public static void AddProductInventory(Product producto, string path)//Añade un producto al inventario
+        {
 
-            
+            VerifyInventoryExist(path);
 
             List<Product> products = new List<Product> { };//Creamos la lista donde vamos a guardar todos los productos
             string json_new; //Creamos el string donde guardaremos el json con el nuevo producto
 
-            products = DeserializeInventory();//Usamos nuestra funcion que devuelve en caso de que el archvio si contenga productos una lista<Product> con los productos
+            products = DeserializeInventory(path);//Usamos nuestra funcion que devuelve en caso de que el archvio si contenga productos una lista<Product> con los productos
 
             products.Add(producto);//Añadimos el nuevo producto a la lista de productos
 
@@ -86,7 +86,7 @@ namespace MySpace_Inventory.Services
 
             try
             {
-                File.WriteAllText(AppConfig.inventory_path, json_new);//Escribimos en el JSON la lista con los productos
+                File.WriteAllText(path, json_new);//Escribimos en el JSON la lista con los productos
 
             }
             catch (Exception e)
@@ -97,11 +97,11 @@ namespace MySpace_Inventory.Services
             
         }
 
-        public static void EliminateProductInventory(Product producto)//Metodo para eliminar un producto del inventario
+        public static void EliminateProductInventory(Product producto, string path)//Metodo para eliminar un producto del inventario
         {
-            VerifyInventoryExist();//Usamos el metodo para verificar si la carpeta de inventario existe en caso de no el metodo la crea
+            VerifyInventoryExist(path);//Usamos el metodo para verificar si la carpeta de inventario existe en caso de no el metodo la crea
 
-            List<Product> products = DeserializeInventory();//Usamos el metodo para que nos devuelvan los productos en la lista
+            List<Product> products = DeserializeInventory(path);//Usamos el metodo para que nos devuelvan los productos en la lista
             Product product_to_eliminate = new Product("a",1,1,1);//Creamos un producto X donde guardaremos el producto a eliminar
             foreach(Product producto_i in products)//Recorremos la lista de productos buscando el producto a eliminar
             {
@@ -116,7 +116,7 @@ namespace MySpace_Inventory.Services
             try
             {
 
-                File.WriteAllText(AppConfig.inventory_path, json);//Escribimos el nuevo inventario sin el producto
+                File.WriteAllText(path, json);//Escribimos el nuevo Json sin el producto en la ruta indicada
 
 
             }catch(Exception e)

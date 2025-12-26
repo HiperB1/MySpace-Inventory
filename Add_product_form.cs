@@ -26,7 +26,7 @@ namespace MySpace_Inventory
 
                 Product producto = new Product(product_name_textbox.Text, Convert.ToInt32(product_stock_ini_textbox.Text), Convert.ToInt32(product_value_textbox.Text), Convert.ToDouble(product_hours_updown.Value));
                 //Creamos el objeto a añadir
-                Inventory.AddProductInventory(producto);//Añadimos el producto al inventario mediante nuestra funcion AddProductInventory
+                Inventory.AddProductInventory(producto,AppConfig.inventory_path);//Añadimos el producto al inventario mediante nuestra funcion AddProductInventory
                 MessageBox.Show("Producto añadido correctamente");
 
 

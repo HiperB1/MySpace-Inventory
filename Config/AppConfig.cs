@@ -10,6 +10,7 @@ namespace MySpace_Inventory.Config
 
         public static readonly string app_folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MySpaceApp","Data");
         public static readonly string inventory_path = Path.Combine(app_folder, "inventario.json");
+        public static readonly string test_path = Path.Combine(Path.GetTempPath(), "inventario_test.json");
 
 
 

@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../MySpace_Test/MySpace_Test.csproj" Id="7fef3a17-2bd8-4a8a-9425-db6ed8b41553" />
   <Project Path="MySpace_Inventory.csproj" />
 </Solution>
