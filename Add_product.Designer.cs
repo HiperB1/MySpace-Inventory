@@ -39,6 +39,7 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)product_hours_updown).BeginInit();
             SuspendLayout();
             // 
@@ -137,11 +138,23 @@
             label4.TabIndex = 11;
             label4.Text = "Horas";
             // 
+            // button2
+            // 
+            button2.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.Location = new Point(69, 250);
+            button2.Name = "button2";
+            button2.Size = new Size(92, 31);
+            button2.TabIndex = 12;
+            button2.Text = "JSON";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // Add_product
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(556, 351);
+            Controls.Add(button2);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -173,5 +186,6 @@
         private Label label2;
         private Label label3;
         private Label label4;
+        private Button button2;
     }
 }

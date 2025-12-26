@@ -5,7 +5,7 @@ using MySpace_Inventory.Config;
 
 namespace MySpace_Inventory.Services
 {
-    public static class Inventory_services
+    public static class Inventory
     {
 
         public static List<string> GetProduct(string product_to_search)//Esta funcion nos va a buscar un producto indicado y nos va a devolver todos sus datos en una lista
