@@ -1,6 +1,6 @@
 ﻿namespace MySpace_Inventory
 {
-    partial class Add_product
+    partial class Add_product_form
     {
         /// <summary>
         /// Required designer variable.
@@ -34,12 +34,11 @@
             product_value_textbox = new TextBox();
             product_stock_ini_textbox = new TextBox();
             product_hours_updown = new NumericUpDown();
-            button1 = new Button();
+            btnSalir = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)product_hours_updown).BeginInit();
             SuspendLayout();
             // 
@@ -92,15 +91,16 @@
             product_hours_updown.Size = new Size(48, 23);
             product_hours_updown.TabIndex = 6;
             // 
-            // button1
+            // btnSalir
             // 
-            button1.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(265, 250);
-            button1.Name = "button1";
-            button1.Size = new Size(92, 31);
-            button1.TabIndex = 7;
-            button1.Text = "Cancelar";
-            button1.UseVisualStyleBackColor = true;
+            btnSalir.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSalir.Location = new Point(265, 250);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(92, 31);
+            btnSalir.TabIndex = 7;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
             // 
             // label1
             // 
@@ -138,35 +138,23 @@
             label4.TabIndex = 11;
             label4.Text = "Horas";
             // 
-            // button2
-            // 
-            button2.Font = new Font("Trebuchet MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(69, 250);
-            button2.Name = "button2";
-            button2.Size = new Size(92, 31);
-            button2.TabIndex = 12;
-            button2.Text = "JSON";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // Add_product
+            // Add_product_form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(556, 351);
-            Controls.Add(button2);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button1);
+            Controls.Add(btnSalir);
             Controls.Add(product_hours_updown);
             Controls.Add(product_stock_ini_textbox);
             Controls.Add(product_value_textbox);
             Controls.Add(product_name_textbox);
             Controls.Add(btnAñadir);
             Controls.Add(titulo_principal);
-            Name = "Add_product";
+            Name = "Add_product_form";
             Text = "Añadir";
             ((System.ComponentModel.ISupportInitialize)product_hours_updown).EndInit();
             ResumeLayout(false);
@@ -181,11 +169,10 @@
         private TextBox product_value_textbox;
         private TextBox product_stock_ini_textbox;
         private NumericUpDown product_hours_updown;
-        private Button button1;
+        private Button btnSalir;
         private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
-        private Button button2;
     }
 }

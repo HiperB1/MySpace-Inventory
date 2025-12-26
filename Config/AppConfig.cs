@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace MySpace_Inventory.Config
 {
     public static class AppConfig
     {
-        public static string inventory_path = "C:\\Users\\jjrav\\source\\repos\\MySpace_Inventory\\resource\\Data\\Inventario.txt";
+
+        public static readonly string app_folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MySpaceApp","Data");
+        public static readonly string inventory_path = Path.Combine(app_folder, "inventario.json");
+
 
 
     }

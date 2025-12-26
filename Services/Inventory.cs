@@ -1,73 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using MySpace_Inventory.Config;
+using System.IO;
 
 namespace MySpace_Inventory.Services
 {
     public static class Inventory
     {
-
-        public static List<string> GetProduct(string product_to_search)//Esta funcion nos va a buscar un producto indicado y nos va a devolver todos sus datos en una lista
+        private static List<Product> DeserializeInventory()
         {
-            List<string> product = new List<string>{};
-            string[] lineas = File.ReadAllLines(AppConfig.inventory_path);
-            string[] lineas_separada;
-            foreach(string linea in lineas)
+
+            List<Product> products = new List<Product> { };//Creamos la lista donde vamos a guardar todos los productos
+
+
+
+            if (File.Exists(AppConfig.inventory_path))//Comprobamos que el archivo exista
             {
-                lineas_separada = linea.Split("-");
-                if (lineas_separada[0] == product_to_search)
+                string json = File.ReadAllText(AppConfig.inventory_path);//Leemos y guardamos toda la info del archivo
+
+
+                if (!string.IsNullOrWhiteSpace(json))//Comprobamos que el archivo no este vacio o corrupto
                 {
-                    product.AddRange(lineas_separada);
+                    products = JsonSerializer.Deserialize<List<Product>>(json) ?? new List<Product> { };//Deserializamos el JSON y lo guardamos en la lista de productos
                 }
 
             }
 
-            return product;
+            return products;
+
+        }
+        public static Product? GetProduct(string product_to_search)//Esta funcion nos va a buscar un producto indicado y nos va a devolver el producto
+        {
+
+
+            List<Product> products = DeserializeInventory();//Usamos nuestro metodo para deserializar el inventario
+
+            foreach(Product producto in products)//Recorremos la lista de productos
+            {
+                if(producto.Name.ToLower() == product_to_search.ToLower())//Comparamos el nombre del producto buscado con el nombre de produ
+                {
+                    return producto;//Retornamos el producto
+
+                }
+
+            }
+
+            return null;//En caso de no encontrar el producto devolvemos Null
+
+
         }
 
         public static List<string> GetAllProductsNames()//Esta funcion nos va a devolver todos los nombres de los productos en nuestro inventario
         {
-            List<string> products_names = new List<string> { };
-            string[] lineas = File.ReadAllLines(AppConfig.inventory_path);
-            string[] lineas_separada;
-            foreach (string linea in lineas)
-            {
-                lineas_separada = linea.Split("-");
-                products_names.Add(lineas_separada[0]);
 
+            List<string> products_names = new List<string> { };//Creamos la lista donde vamos a guardar los nombres de los productos
+            List<Product> products = DeserializeInventory();//Creamos la lista donde vamos a guardar todos los productos
+
+            foreach(Product producto in products)//Recorremos el arreglo de los productos
+            {
+                products_names.Add(producto.Name);//Añadimos a la lista que vamos a devolver el nombre del producto
             }
 
-            return products_names;
+            return products_names;//Retornamos
 
 
         }
 
-        public static void AddProduct(string product_name, string product_value, string product_stock, string product_hours)
-        {
-            if(string.IsNullOrEmpty(product_name) || string.IsNullOrEmpty(product_value) || string.IsNullOrEmpty(product_stock) || string.IsNullOrEmpty(product_hours) || Convert.ToInt32(product_hours) <= 0)
+        public static void AddProductInventory(Product producto)//Añade un producto al inventario
+        { 
+
+            if (!File.Exists(AppConfig.app_folder))//Verificamos si la carpeta donde guardaremos el inventario existe
+            {//En caso de no exisitir la crearemos, no es necesario crear el .json como tal pues el File.Write ya lo crea en caso de no existir
+                Directory.CreateDirectory(AppConfig.app_folder);     
+            }
+
+            List<Product> products = new List<Product> { };//Creamos la lista donde vamos a guardar todos los productos
+            string json_new; //Creamos el string donde guardaremos el json con el nuevo producto
+
+            products = DeserializeInventory();//Usamos nuestra funcion que devuelve en caso de que el archvio si contenga productos una lista<Product> con los productos
+
+            products.Add(producto);//Añadimos el nuevo producto a la lista de productos
+
+            json_new = JsonSerializer.Serialize(products, new JsonSerializerOptions{WriteIndented = true});//Serializamos la lista de productos para guardarla en JSON
+
+            try
             {
-                MessageBox.Show("Debes rellenar todos los campos","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                File.WriteAllText(AppConfig.inventory_path, json_new);//Escribimos en el JSON la lista con los productos
 
             }
-            else
+            catch (Exception e)
             {
-                try
-                {
-                    string producto_to_add = $"\n{product_name}-{product_stock}-{product_hours}-{product_value}";
-                    File.AppendAllText(AppConfig.inventory_path, producto_to_add);
-                    MessageBox.Show("Producto añadido correctamente","Registro Exitoso",MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"Error: {e}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
+                MessageBox.Show($"Error {e}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-                
+            
 
-
+    
             
         }
 

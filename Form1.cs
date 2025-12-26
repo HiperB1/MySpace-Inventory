@@ -16,19 +16,7 @@ namespace MySpace_Inventory
         {
             inventario_listview.Items.Clear();//Importante linea si no esta se sobreponen muchos elementos iguales al no limpiar antes de volver a agregar
 
-            string[] lineas = File.ReadAllLines(AppConfig.inventory_path);
-            string[] lineas_separada;
-            foreach (string linea in lineas)//En este ciclo vamos a recorrer el inventario para mostrar todo el inventario
-            {
-                lineas_separada = linea.Split("-");
-                ListViewItem producto = new ListViewItem(lineas_separada[0]);//Al crear el producto en el constructor el valor que va en la primera columna
-                producto.SubItems.Add(lineas_separada[1]);//Despues en orden se colocan los valores que van en las siguientes columnas
-                producto.SubItems.Add(lineas_separada[3]);//Se agrega su Valor unitario al producto
 
-                inventario_listview.Items.Add(producto);
-
-
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -44,7 +32,7 @@ namespace MySpace_Inventory
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            Add_product añadir_window = new Add_product();//Añadimos la ventana de añadir producto
+            Add_product_form añadir_window = new Add_product_form();//Añadimos la ventana de añadir producto
             añadir_window.ShowDialog();//Mostramos la ventana de añadir producto y bloqueamos la main hasta que se cierre
         }
     }
