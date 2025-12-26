@@ -156,6 +156,7 @@
             Controls.Add(titulo_principal);
             Name = "Add_product_form";
             Text = "Añadir";
+            Load += Add_product_form_Load;
             ((System.ComponentModel.ISupportInitialize)product_hours_updown).EndInit();
             ResumeLayout(false);
             PerformLayout();

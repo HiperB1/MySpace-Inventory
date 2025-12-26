@@ -31,10 +31,17 @@ namespace MySpace_Inventory.Services
             return products;
 
         }
+        private static void VerifyInventoryExist()
+        {
+            if (!File.Exists(AppConfig.app_folder))//Verificamos si la carpeta donde guardaremos el inventario existe
+            {//En caso de no exisitir la crearemos, no es necesario crear el .json como tal pues el File.Write ya lo crea en caso de no existir
+                Directory.CreateDirectory(AppConfig.app_folder);
+            }
+        }
         public static Product? GetProduct(string product_to_search)//Esta funcion nos va a buscar un producto indicado y nos va a devolver el producto
         {
 
-
+            VerifyInventoryExist();
             List<Product> products = DeserializeInventory();//Usamos nuestro metodo para deserializar el inventario
 
             foreach(Product producto in products)//Recorremos la lista de productos
@@ -52,18 +59,13 @@ namespace MySpace_Inventory.Services
 
         }
 
-        public static List<string> GetAllProductsNames()//Esta funcion nos va a devolver todos los nombres de los productos en nuestro inventario
+        public static List<Product> GetAllProducts()//Esta funcion nos va a devolver todos los nombres de los productos en nuestro inventario
         {
 
-            List<string> products_names = new List<string> { };//Creamos la lista donde vamos a guardar los nombres de los productos
             List<Product> products = DeserializeInventory();//Creamos la lista donde vamos a guardar todos los productos
 
-            foreach(Product producto in products)//Recorremos el arreglo de los productos
-            {
-                products_names.Add(producto.Name);//Añadimos a la lista que vamos a devolver el nombre del producto
-            }
 
-            return products_names;//Retornamos
+            return products;//Retornamos
 
 
         }
@@ -71,10 +73,7 @@ namespace MySpace_Inventory.Services
         public static void AddProductInventory(Product producto)//Añade un producto al inventario
         { 
 
-            if (!File.Exists(AppConfig.app_folder))//Verificamos si la carpeta donde guardaremos el inventario existe
-            {//En caso de no exisitir la crearemos, no es necesario crear el .json como tal pues el File.Write ya lo crea en caso de no existir
-                Directory.CreateDirectory(AppConfig.app_folder);     
-            }
+            
 
             List<Product> products = new List<Product> { };//Creamos la lista donde vamos a guardar todos los productos
             string json_new; //Creamos el string donde guardaremos el json con el nuevo producto
@@ -96,10 +95,39 @@ namespace MySpace_Inventory.Services
 
             }
             
-
-    
-            
         }
+
+        public static void EliminateProductInventory(Product producto)//Metodo para eliminar un producto del inventario
+        {
+            VerifyInventoryExist();//Usamos el metodo para verificar si la carpeta de inventario existe en caso de no el metodo la crea
+
+            List<Product> products = DeserializeInventory();//Usamos el metodo para que nos devuelvan los productos en la lista
+            Product product_to_eliminate = new Product("a",1,1,1);//Creamos un producto X donde guardaremos el producto a eliminar
+            foreach(Product producto_i in products)//Recorremos la lista de productos buscando el producto a eliminar
+            {
+                if(producto_i.Name == producto.Name)
+                {
+                    product_to_eliminate = producto_i;//En caso de ser encontrado el producto se guarda en la variable
+                }
+            }
+            products.Remove(product_to_eliminate);//Se elimina el producto de la lista inventario
+
+            string json = JsonSerializer.Serialize(products);//Serializamos el nuevo inventario sin el producto
+            try
+            {
+
+                File.WriteAllText(AppConfig.inventory_path, json);//Escribimos el nuevo inventario sin el producto
+
+
+            }catch(Exception e)
+            {
+                MessageBox.Show($"Error al borrar: {e}","Error de borrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+        }
+
 
     }
 }

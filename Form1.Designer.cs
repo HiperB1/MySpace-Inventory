@@ -35,10 +35,10 @@
             inventario_listview = new ListView();
             Producto = new ColumnHeader();
             stock = new ColumnHeader();
+            Valor = new ColumnHeader();
             button4 = new Button();
             btnActualizar = new Button();
             btnEliminar = new Button();
-            Valor = new ColumnHeader();
             SuspendLayout();
             // 
             // titulo_principal
@@ -95,12 +95,18 @@
             // Producto
             // 
             Producto.Text = "Producto";
-            Producto.Width = 120;
+            Producto.Width = 170;
             // 
             // stock
             // 
             stock.Text = "Stock";
             stock.TextAlign = HorizontalAlignment.Center;
+            // 
+            // Valor
+            // 
+            Valor.Text = "Valor ";
+            Valor.TextAlign = HorizontalAlignment.Center;
+            Valor.Width = 100;
             // 
             // button4
             // 
@@ -132,12 +138,7 @@
             btnEliminar.TabIndex = 7;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
-            // 
-            // Valor
-            // 
-            Valor.Text = "Valor ";
-            Valor.TextAlign = HorizontalAlignment.Center;
-            Valor.Width = 100;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // Main
             // 
