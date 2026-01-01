@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Text;
 
 namespace MySpace_Inventory.Services
@@ -11,6 +12,7 @@ namespace MySpace_Inventory.Services
         public string Product { get; set; }
         public int Time { get; set; }
         public int Priority { get; set; }
+        public string FinishHour { get; set; }
 
         public Program_product(string printer, string product, int time, int priority)
         {
@@ -18,6 +20,7 @@ namespace MySpace_Inventory.Services
             Product = product;
             Time = time;
             Priority = priority;
+            FinishHour = DateTime.Now.AddHours(time).ToString("HH:mm");
         }
         
     }

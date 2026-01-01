@@ -30,7 +30,7 @@
         {
             titulo_principal = new Label();
             btnAñadirACola = new Button();
-            listView1 = new ListView();
+            printer1_listview = new ListView();
             cola_impresora = new ColumnHeader();
             hora = new ColumnHeader();
             printer1_combobox = new ComboBox();
@@ -70,15 +70,15 @@
             btnAñadirACola.Text = "Añadir a cola";
             btnAñadirACola.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // printer1_listview
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { cola_impresora, hora });
-            listView1.Location = new Point(42, 78);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(204, 228);
-            listView1.TabIndex = 3;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.Details;
+            printer1_listview.Columns.AddRange(new ColumnHeader[] { cola_impresora, hora });
+            printer1_listview.Location = new Point(42, 78);
+            printer1_listview.Name = "printer1_listview";
+            printer1_listview.Size = new Size(204, 228);
+            printer1_listview.TabIndex = 3;
+            printer1_listview.UseCompatibleStateImageBehavior = false;
+            printer1_listview.View = View.Details;
             // 
             // cola_impresora
             // 
@@ -227,7 +227,7 @@
             Controls.Add(comboBox2);
             Controls.Add(listView2);
             Controls.Add(printer1_combobox);
-            Controls.Add(listView1);
+            Controls.Add(printer1_listview);
             Controls.Add(btnAñadirACola);
             Controls.Add(titulo_principal);
             Name = "Program";
@@ -242,7 +242,7 @@
 
         private Label titulo_principal;
         private Button btnAñadirACola;
-        private ListView listView1;
+        private ListView printer1_listview;
         private ColumnHeader cola_impresora;
         private ColumnHeader hora;
         private ComboBox printer1_combobox;

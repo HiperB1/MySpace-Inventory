@@ -27,7 +27,7 @@ namespace MySpace_Inventory
                 List<Program_product> printer_products = new List<Program_product> { };
                 string path = Path.Combine(AppConfig.app_folder,$"{printer_combobox.Text}.json");
 
-                //AppConfig.app_folder + $"{printer_combobox.Text}.json";
+  
                 if (File.Exists(path))
                 {
                     string json = File.ReadAllText(path);
@@ -65,13 +65,21 @@ namespace MySpace_Inventory
 
         private void printer1_combobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string path = AppConfig.app_folder + $"{printer1_combobox.Text}.json";
-            if (printer1_combobox.SelectedIndex > 0)
+            string path = Path.Combine(AppConfig.app_folder, $"{printer1_combobox.Text}.json");
+            printer1_listview.Items.Clear();
+            if (printer1_combobox.SelectedIndex >= 0)
             {
                 if (printer1_combobox.Text == "215")
                 {
                     string json = File.ReadAllText(path);
+                    var cola = JsonSerializer.Deserialize<List<Program_product>>(json);
 
+                    foreach(Program_product product in cola)
+                    {
+                        ListViewItem item = new ListViewItem(product.Product);
+                        item.SubItems.Add(product.FinishHour);
+                        printer1_listview.Items.Add(item);
+                    }
 
 
                 }
