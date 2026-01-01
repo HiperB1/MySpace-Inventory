@@ -71,6 +71,7 @@
             btnPrograma.TabIndex = 2;
             btnPrograma.Text = "Programa";
             btnPrograma.UseVisualStyleBackColor = true;
+            btnPrograma.Click += btnPrograma_Click;
             // 
             // btnPedidos
             // 
@@ -91,6 +92,7 @@
             inventario_listview.TabIndex = 4;
             inventario_listview.UseCompatibleStateImageBehavior = false;
             inventario_listview.View = View.Details;
+            inventario_listview.SelectedIndexChanged += inventario_listview_SelectedIndexChanged;
             // 
             // Producto
             // 

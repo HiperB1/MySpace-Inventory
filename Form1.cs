@@ -52,16 +52,16 @@ namespace MySpace_Inventory
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            
-           
+
+
             if (inventario_listview.SelectedItems.Count > 0)//Comprobamos que si hayan seleccionado un producto del listview
             {
                 ListViewItem producto_name = inventario_listview.SelectedItems[0];//Obtenemos el item seleccionado del listview
                 List<Product> allProducts = Inventory.GetAllProducts(AppConfig.inventory_path);//Obtenemos todos los productos del inventario 
-                
-                foreach(Product product in allProducts)//Iteramos todos los productos para comparar el item buscado y el iterado
+
+                foreach (Product product in allProducts)//Iteramos todos los productos para comparar el item buscado y el iterado
                 {
-                    if(product.Name.ToLower() ==  producto_name.Text.ToLower())//Comparamos si el producto iterado tiene el mismo nombre que el producto buscado
+                    if (product.Name.ToLower() == producto_name.Text.ToLower())//Comparamos si el producto iterado tiene el mismo nombre que el producto buscado
                     {
                         DialogResult confirmacion = MessageBox.Show($"Confirma querer eliminar el producto: {product.Name}", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         //Preguntamos al usuario si confirma eliminar el producto y guardamos su desicion en la variable confirmacion
@@ -80,6 +80,17 @@ namespace MySpace_Inventory
             {
                 MessageBox.Show("Debe seleccionar algun producto del inventario", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void inventario_listview_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrograma_Click(object sender, EventArgs e)
+        {
+            Program program_form = new Program();
+            program_form.ShowDialog();
         }
     }
 }

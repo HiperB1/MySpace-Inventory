@@ -10,9 +10,12 @@ namespace MySpace_Inventory.Services
         public string Name { get; set; }
         public int Stock { get; set; }
         public int Value { get; set; }
-        public double Hours { get; set; }
+
+        public bool HasParts { get; }
+
+        public List<string> parts { get; private set; }
         
-        public Product(string name, int stock, int value, double hours)//Este es el constructor de la clase
+        public Product(string name, int stock, int value, bool hasParts = false)//Este es el constructor de la clase
         {
 
             if(value < 0)
@@ -23,15 +26,15 @@ namespace MySpace_Inventory.Services
             {
                 throw new ArgumentException("El stock debe ser mayor a 0");
             }
-            if(hours <= 0)
+            if(hasParts = true)
             {
-                throw new ArgumentException("Las horas deben ser mayores a 0");
+                parts = new List<string> { };
             }
 
             Name = name;
             Stock = stock;
             Value = value;
-            Hours = hours;
+            HasParts = hasParts;
 
 
         }

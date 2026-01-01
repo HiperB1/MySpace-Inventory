@@ -31,17 +31,17 @@ namespace MySpace_Inventory.Services
             return products;
 
         }
-        private static void VerifyInventoryExist(string path)
+        private static void VerifyInventoryExist()
         {
-            if (!File.Exists(path))//Verificamos si la carpeta donde guardaremos el inventario existe
+            if (!Directory.Exists(AppConfig.app_folder))//Verificamos si la carpeta donde guardaremos el inventario existe
             {//En caso de no exisitir la crearemos, no es necesario crear el .json como tal pues el File.Write ya lo crea en caso de no existir
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(AppConfig.app_folder);
             }
         }
         public static Product? GetProduct(string product_to_search, string path)//Esta funcion nos va a buscar un producto indicado y nos va a devolver el producto
         {
 
-            VerifyInventoryExist(path);
+            VerifyInventoryExist();
             List<Product> products = DeserializeInventory(path);//Usamos nuestro metodo para deserializar el inventario
 
             foreach(Product producto in products)//Recorremos la lista de productos
@@ -73,7 +73,7 @@ namespace MySpace_Inventory.Services
         public static void AddProductInventory(Product producto, string path)//Añade un producto al inventario
         {
 
-            VerifyInventoryExist(path);
+            VerifyInventoryExist();
 
             List<Product> products = new List<Product> { };//Creamos la lista donde vamos a guardar todos los productos
             string json_new; //Creamos el string donde guardaremos el json con el nuevo producto
@@ -93,16 +93,18 @@ namespace MySpace_Inventory.Services
             {
                 MessageBox.Show($"Error {e}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+
+
             }
             
         }
 
         public static void EliminateProductInventory(Product producto, string path)//Metodo para eliminar un producto del inventario
         {
-            VerifyInventoryExist(path);//Usamos el metodo para verificar si la carpeta de inventario existe en caso de no el metodo la crea
+            VerifyInventoryExist();//Usamos el metodo para verificar si la carpeta de inventario existe en caso de no el metodo la crea
 
             List<Product> products = DeserializeInventory(path);//Usamos el metodo para que nos devuelvan los productos en la lista
-            Product product_to_eliminate = new Product("a",1,1,1);//Creamos un producto X donde guardaremos el producto a eliminar
+            Product product_to_eliminate = new Product("a",1,1);//Creamos un producto X donde guardaremos el producto a eliminar
             foreach(Product producto_i in products)//Recorremos la lista de productos buscando el producto a eliminar
             {
                 if(producto_i.Name == producto.Name)
